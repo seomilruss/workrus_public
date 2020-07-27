@@ -1,18 +1,25 @@
 package part_basic.calc;
 
+/*
+	Feedback Code of info
+	
+	Developer : Cho Young deok(조영덕)
+	Deve Started : 2020_07_28
+	Github - https://github.com/seomilruss/workruss_public
+	E-mail : wde906@naver.com
+*/
+
 import java.util.Scanner;
 
-/*
- 	Github - https://github.com/seomilruss/workruss_public
-*/
 class SelectLauncher {
 	// ▼Datas
 	Scanner input = new Scanner(System.in);
 	private int uSelectNum;
-	private String function1 = "두 수의 덧셈";
-	private String function2 = "부가세와 잔돈을 계산";
-	private String function3 = "원의 면적 계산기";
-	private String function4 = "달러 환전 계산기";
+	// ▼Datas is for UI(UserInterface)
+	private String function1 = "add two number";
+	private String function2 = "calc surtax & balance";
+	private String function3 = "calc area circle";
+	private String function4 = "calc exchange dollar";
 	
 	public Scanner getInput() {
 		return input;
@@ -51,15 +58,15 @@ class SelectLauncher {
 		this.function4 = function4;
 	}
 	// ▼UIs
-	public void start() {
+	void start() {
 		outputFunctionList();
 		input();
 		selectFunction(uSelectNum);
 	}
 	
-	public void outputFunctionList() {
+	void outputFunctionList() {
 		System.out.print(
-			"원하는 기능을 선택해주세요." + "\n" +
+			"select the function." + "\n" +
 			"1. " + getFunction1() + "\n" +
 			"2. " + getFunction2() + "\n" +
 			"3. " + getFunction3() + "\n" +
@@ -67,12 +74,12 @@ class SelectLauncher {
 		);
 	}
 	
-	public void input() {
+	void input() {
 		uSelectNum = input.nextInt();
 	}
-	public void wrong() {
+	void wrong() {
 		System.out.println(
-			"잘못된 입력입니다."
+			"input was wrong."
 		);
 	}
 	// ▼Logics

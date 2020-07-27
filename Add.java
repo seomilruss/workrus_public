@@ -5,21 +5,46 @@ import java.util.Scanner;
 class Add {
 	// ▼Datas
 	Scanner input = new Scanner(System.in);
-	int firstNum;
-	int secondNum;
-	int sum;
+	private int firstNum;
+	private int secondNum;
+	private int sum;
+	
+	public Scanner getInput() {
+		return input;
+	}
+	public void setInput(Scanner input) {
+		this.input = input;
+	}
+	public int getFirstNum() {
+		return firstNum;
+	}
+	public void setFirstNum(int firstNum) {
+		this.firstNum = firstNum;
+	}
+	public int getSecondNum() {
+		return secondNum;
+	}
+	public void setSecondNum(int secondNum) {
+		this.secondNum = secondNum;
+	}
+	public int getSum() {
+		return sum;
+	}
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
 	
 	// ▼UIs
 	void inputRequest() { // Request UI
 		System.out.print(
-			"첫 번째 숫자와 두 번째 숫자를 입력하시오" +
-			"[입력예 : 첫 번째 숫자  두 번째 숫자]: "
+			"input firstNumber & secondNumber." +
+			"[Input example : firstNumber  secondNumber]: "
 		);
 		input();
 	}
 	void returnResponse() { // Response UI
 		System.out.print(
-			"두 수의 합은 " + sum + " 입니다." + "\n"
+			"sum Number it's " + sum + "\n"
 		);
 	}
 	

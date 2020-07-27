@@ -25,13 +25,13 @@ class Exchange {
 	// ▼UIs
 	void inputRequest() { // Request UI
 		System.out.print(
-			"원화를 입력해주세요 : "
+			"input the sum(unit won) : "
 		);
 		input();
 	}
 	void returnResponse() { // Response UI
 		System.out.print(
-			(getInputMoney()/won) + "달러"
+			(getInputMoney()/won) + "dollar."
 		);
 	}
 	// ▼Logics
@@ -44,5 +44,4 @@ class Exchange {
 		inputMoney = input.nextInt();
 		returnResponse();	
 	}
-	
 }

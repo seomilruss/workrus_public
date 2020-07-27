@@ -5,19 +5,37 @@ import java.util.Scanner;
 class CircleArea {
 	// ▼Datas
 	Scanner input = new Scanner(System.in);
-	double radius;
-	double area;
+	private double radius;
+	private double area;
 	
+	public Scanner getInput() {
+		return input;
+	}
+	public void setInput(Scanner input) {
+		this.input = input;
+	}
+	public double getRadius() {
+		return radius;
+	}
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+	public double getArea() {
+		return area;
+	}
+	public void setArea(double area) {
+		this.area = area;
+	}
 	// ▼UIs
 	void inputRequest() { // Request UI
 		System.out.print(
-			"반지름을 입력해주세요 : "
+			"input radius : "
 		);
 		input();
 	}
 	void returnResponse() { // Response UI
 		System.out.print(
-			"원의 면적은 " + area + " 입니다." + "\n"
+			"area circle it's " + area + "(area)" + "\n"
 		);
 	}
 	

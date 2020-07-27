@@ -5,23 +5,53 @@ import java.util.Scanner;
 class Bill {
 	// ▼Datas
 	Scanner input = new Scanner(System.in);
-	int cash;
-	int total;
-	double tax;
-	int change;
+	private int cash;
+	private int total;
+	private double tax;
+	private int change;
 	
+	public Scanner getInput() {
+		return input;
+	}
+	public void setInput(Scanner input) {
+		this.input = input;
+	}
+	public int getCash() {
+		return cash;
+	}
+	public void setCash(int cash) {
+		this.cash = cash;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public double getTax() {
+		return tax;
+	}
+	public void setTax(double tax) {
+		this.tax = tax;
+	}
+	public int getChange() {
+		return change;
+	}
+	public void setChange(int change) {
+		this.change = change;
+	}
 	// ▼UIs
 	void inputRequest() { // Request UI
 		System.out.print(
-			"구입한 상품의 총 가격과  손님께 받은 총 금액을 입력사세요\n" +
-			"[입력예 : 상품의 총액  받은 금액] : "
+			"input item of price and guest of receive money\n" +
+			"[Input example : price  receiveMoney]"
 		);
 		input();
 	}
 	void returnResponse() { // Response UI
 		System.out.println(
-			"부가세는" + tax + "원 입니다." + "\n" +
-			"잔돈은 " + change + "원 입니다."
+			"surtax is " + tax + "(unit won)." + "\n" +
+			"balance is " + change + "(unit won)."
 		);
 	}	
 	// ▼Logics
