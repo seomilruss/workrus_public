@@ -3,7 +3,7 @@ package part_basic.calc;
 import java.util.Scanner;
 
 /*
- 	Github - https://github.com/seomilruss/workrus_public
+ 	Github - https://github.com/seomilruss/workruss_public
 */
 class SelectLauncher {
 	// ▼Datas
