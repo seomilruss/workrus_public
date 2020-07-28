@@ -6,6 +6,7 @@ class VendingMachine { // 자판기
 	// ▼Datas
 	Scanner inputNum = new Scanner(System.in);
 	DisplayUserInterface dUI = new DisplayUserInterface();
+	ControlCircuit cct = new ControlCircuit();
 	public int userSelect; // 사용자 입력값
 	public int insertMoney; // 입력값
 	public int balance; // 잔액
@@ -55,8 +56,6 @@ class VendingMachine { // 자판기
 			);
 		}
 	}
-	
-	
 	public int getUserSelect() {
 		return userSelect;
 	}
@@ -75,93 +74,96 @@ class VendingMachine { // 자판기
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
+	
 	// ▼Logics
 	void start() {
-		transactionModule();
+		cct.transactionModule();
 	}
-	public void transactionModule() { // 거래
-		selectItem();
-		inputMoney();
-	}
-	public void selectItem() { // 상품선택
-		dUI.itemList();
-		userSelect = inputNum.nextInt();
-		switch (userSelect) {
-		case 1:
-			insertMoney = gorgiaCoffe;
-			System.out.println("조지아 커피를 선택했습니다.");
-			break;
-		case 2:
-			insertMoney = maxwellCoffe;
-			System.out.println("맥스윌 커피를 선택했습니다.");
-			break;
-		case 3:
-			insertMoney = dAndCafeCoffe;
-			System.out.println("D&cafe 커피를 선택했습니다.");
-			break;
-		default:
-			dUI.wrong();
-			break;
+	class ControlCircuit {
+		public void transactionModule() { // 거래
+			selectItem();
+			inputMoney();
 		}
-	}
-	public void inputMoney() { // 금액투입
-		if (balance > insertMoney) {
-			payMoney();
-		} else {
-			dUI.requestMoney();
-			dUI.checkMomey();
-			dUI.selectMoneyUnit();
+		public void selectItem() { // 상품선택
+			dUI.itemList();
 			userSelect = inputNum.nextInt();
 			switch (userSelect) {
 			case 1:
-				balance += 10;
+				insertMoney = gorgiaCoffe;
+				System.out.println("조지아 커피를 선택했습니다.");
 				break;
 			case 2:
-				balance += 50;
+				insertMoney = maxwellCoffe;
+				System.out.println("맥스윌 커피를 선택했습니다.");
 				break;
 			case 3:
-				balance += 100;
-				break;
-			case 4:
-				balance += 500;
-				break;
-			case 5:
-				balance += 1000;
+				insertMoney = dAndCafeCoffe;
+				System.out.println("D&cafe 커피를 선택했습니다.");
 				break;
 			default:
 				dUI.wrong();
 				break;
 			}
-			inputMoney();
 		}
-	}
-	public void payMoney() { // 결제
-		if (balance >= insertMoney) {
-			balance -= insertMoney;
-			dUI.payOk();
-			dUI.checkMomey();
-			checkOtherTransaction();
-			payReturn();
-			dUI.goodBye();
-		} else {
-			inputMoney();
+		public void inputMoney() { // 금액투입
+			if (balance > insertMoney) {
+				payMoney();
+			} else {
+				dUI.requestMoney();
+				dUI.checkMomey();
+				dUI.selectMoneyUnit();
+				userSelect = inputNum.nextInt();
+				switch (userSelect) {
+				case 1:
+					balance += 10;
+					break;
+				case 2:
+					balance += 50;
+					break;
+				case 3:
+					balance += 100;
+					break;
+				case 4:
+					balance += 500;
+					break;
+				case 5:
+					balance += 1000;
+					break;
+				default:
+					dUI.wrong();
+					break;
+				}
+				inputMoney();
+			}
 		}
-	}
-	public void payReturn() { // 잔액 반환
-		balance -= balance;
-	}
-	public void checkOtherTransaction() { // 다른 거래의 유무 확인
-		dUI.askOtherTransaction();
-		userSelect = inputNum.nextInt();
-		switch (userSelect) {
-		case 0:
-			transactionModule();
-			break;
-		case 1:
-			break;
-		default:
-			dUI.wrong();
-			break;
+		public void payMoney() { // 결제
+			if (balance >= insertMoney) {
+				balance -= insertMoney;
+				dUI.payOk();
+				dUI.checkMomey();
+				checkOtherTransaction();
+				payReturn();
+				dUI.goodBye();
+			} else {
+				inputMoney();
+			}
+		}
+		public void payReturn() { // 잔액 반환
+			balance -= balance;
+		}
+		public void checkOtherTransaction() { // 다른 거래의 유무 확인
+			dUI.askOtherTransaction();
+			userSelect = inputNum.nextInt();
+			switch (userSelect) {
+			case 0:
+				transactionModule();
+				break;
+			case 1:
+				break;
+			default:
+				dUI.wrong();
+				break;
+			}
 		}
 	}
 }
