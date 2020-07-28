@@ -5,6 +5,7 @@ import java.util.Scanner;
 class VendingMachine { // 자판기
 	// ▼Datas
 	Scanner inputNum = new Scanner(System.in);
+	DisplayUserInterface dUI = new DisplayUserInterface();
 	public int userSelect; // 사용자 입력값
 	public int insertMoney; // 입력값
 	public int balance; // 잔액
@@ -12,46 +13,50 @@ class VendingMachine { // 자판기
 	public int maxwellCoffe = 500;
 	public int dAndCafeCoffe = 600;
 	
-	// ▼UIs
-	void itemList() {
-		System.out.println("원하시는 상품의 번호를 선택해주세요" + "\n" +
-			"1. 조지아 커피 : " + gorgiaCoffe + "\n" +
-			"2. 맥스윌 커피 : " + maxwellCoffe + "\n" +
-			"3. D&cafe 커피 : " + dAndCafeCoffe
-		);
+	class DisplayUserInterface {
+		// ▼UIs
+		void itemList() {
+			System.out.println("원하시는 상품의 번호를 선택해주세요" + "\n" +
+				"1. 조지아 커피 : " + gorgiaCoffe + "\n" +
+				"2. 맥스윌 커피 : " + maxwellCoffe + "\n" +
+				"3. D&cafe 커피 : " + dAndCafeCoffe
+			);
+		}
+		void requestMoney() {
+			System.out.println("돈을 투입해주세요");
+		}
+		void selectMoneyUnit() {
+			System.out.println("투입할 돈의 단위의 번호를 선택해주세요." + "\n" +
+				"1. 10원" + "\n" +
+				"2. 50원" + "\n" +
+				"3. 100원" + "\n" +
+				"4. 500원" + "\n" +
+				"5. 1000원" + "\n"
+			);
+		}
+		void checkMomey() { // 금액 확인
+			System.out.println("[현재 금액 : " + balance + " 원]");
+		}
+		void payOk() {
+			System.out.println("결제완료, 상품이 배출되었습니다.");
+		}
+		void askOtherTransaction() {
+			System.out.println(
+				"추가로 구매하실 것이 있으신가요?" +
+				"[입력예 _ 0 : true, 1 : false]"
+			);
+		}
+		void wrong() {
+			System.out.println("잘못된 입력입니다.");
+		}
+		void goodBye() {
+			System.out.println(
+				"거래가 종료되었습니다.\n" + "안녕히가세요."
+			);
+		}
 	}
-	void requestMoney() {
-		System.out.println("돈을 투입해주세요");
-	}
-	void selectMoneyUnit() {
-		System.out.println("투입할 돈의 단위의 번호를 선택해주세요." + "\n" +
-			"1. 10원" + "\n" +
-			"2. 50원" + "\n" +
-			"3. 100원" + "\n" +
-			"4. 500원" + "\n" +
-			"5. 1000원" + "\n"
-		);
-	}
-	void checkMomey() { // 금액 확인
-		System.out.println("[현재 금액 : " + balance + " 원]");
-	}
-	void payOk() {
-		System.out.println("결제완료, 상품이 배출되었습니다.");
-	}
-	void askOtherTransaction() {
-		System.out.println(
-			"추가로 구매하실 것이 있으신가요?" +
-			"[입력예 _ 0 : true, 1 : false]"
-		);
-	}
-	void wrong() {
-		System.out.println("잘못된 입력입니다.");
-	}
-	void goodBye() {
-		System.out.println(
-			"거래가 종료되었습니다.\n" + "안녕히가세요."
-		);
-	}
+	
+	
 	public int getUserSelect() {
 		return userSelect;
 	}
@@ -79,7 +84,7 @@ class VendingMachine { // 자판기
 		inputMoney();
 	}
 	public void selectItem() { // 상품선택
-		itemList();
+		dUI.itemList();
 		userSelect = inputNum.nextInt();
 		switch (userSelect) {
 		case 1:
@@ -95,7 +100,7 @@ class VendingMachine { // 자판기
 			System.out.println("D&cafe 커피를 선택했습니다.");
 			break;
 		default:
-			wrong();
+			dUI.wrong();
 			break;
 		}
 	}
@@ -103,9 +108,9 @@ class VendingMachine { // 자판기
 		if (balance > insertMoney) {
 			payMoney();
 		} else {
-			requestMoney();
-			checkMomey();
-			selectMoneyUnit();
+			dUI.requestMoney();
+			dUI.checkMomey();
+			dUI.selectMoneyUnit();
 			userSelect = inputNum.nextInt();
 			switch (userSelect) {
 			case 1:
@@ -124,7 +129,7 @@ class VendingMachine { // 자판기
 				balance += 1000;
 				break;
 			default:
-				wrong();
+				dUI.wrong();
 				break;
 			}
 			inputMoney();
@@ -133,11 +138,11 @@ class VendingMachine { // 자판기
 	public void payMoney() { // 결제
 		if (balance >= insertMoney) {
 			balance -= insertMoney;
-			payOk();
-			checkMomey();
+			dUI.payOk();
+			dUI.checkMomey();
 			checkOtherTransaction();
 			payReturn();
-			goodBye();
+			dUI.goodBye();
 		} else {
 			inputMoney();
 		}
@@ -146,7 +151,7 @@ class VendingMachine { // 자판기
 		balance -= balance;
 	}
 	public void checkOtherTransaction() { // 다른 거래의 유무 확인
-		askOtherTransaction();
+		dUI.askOtherTransaction();
 		userSelect = inputNum.nextInt();
 		switch (userSelect) {
 		case 0:
@@ -155,7 +160,7 @@ class VendingMachine { // 자판기
 		case 1:
 			break;
 		default:
-			wrong();
+			dUI.wrong();
 			break;
 		}
 	}
