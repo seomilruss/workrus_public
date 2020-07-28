@@ -1,21 +1,18 @@
 package part_basic.calc;
 
-import java.util.Scanner;
-
 class Bill {
 	// ▼Datas
-	Scanner input = new Scanner(System.in);
 	private int cash;
 	private int total;
 	private double tax;
 	private int change;
 	
-	public Scanner getInput() {
-		return input;
+	public Bill(int cash, int total) {
+		setCash(cash);
+		setTotal(total);
+		start();
 	}
-	public void setInput(Scanner input) {
-		this.input = input;
-	}
+	
 	public int getCash() {
 		return cash;
 	}
@@ -41,35 +38,40 @@ class Bill {
 		this.change = change;
 	}
 	// ▼UIs
-	void inputRequest() { // Request UI
-		System.out.print(
-			"input item of price and guest of receive money\n" +
-			"[Input example : price  receiveMoney]"
-		);
-		input();
+//	★ Constructor Do Input values
+//	void inputRequest() { // Request UI
+//		System.out.print(
+//			"input item of price and guest of receive money\n" +
+//			"[Input example : price  receiveMoney]"
+//		);
+//		input();
+//	}
+	
+	public String toString() { // Response UI
+		String result = "";
+		result += "cash is " + getCash() + "(unit won)." + "\n";
+		result += "total is " + getTotal() + "(unit won)." + "\n";
+		result += "surtax is " + getTax() + "(unit won)." + "\n";
+		result += "balance is " + getChange() + "(unit won).";
+		return result;
 	}
-	void returnResponse() { // Response UI
-		System.out.println(
-			"surtax is " + tax + "(unit won)." + "\n" +
-			"balance is " + change + "(unit won)."
-		);
-	}	
+	
 	// ▼Logics
 	void start() {
-		inputRequest();
-		input();
+		input(getCash(), getTotal());
+		toString();
 	}
-	void input() {
-		cash = input.nextInt();
-		total = input.nextInt();
-		process1(cash);
-		process2(total);
-		returnResponse();
+	void input(
+			int sum1,
+			int sum2
+		) {
+		process1(sum1);
+		process2(sum2);
 	}
 	double process1(int sum1) {
-		return tax = cash * 0.1;
+		return tax = sum1 * 0.1;
 	}
 	int process2(int sum2) {
-		return change = cash - total;
+		return change = getCash() - sum2;
 	}
 }

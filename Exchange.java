@@ -1,18 +1,14 @@
 package part_basic.calc;
 
-import java.util.Scanner;
-
 class Exchange {
 	// ▼Datas
-	Scanner input = new Scanner(System.in);
 	final double won = 1392.83;
 	private int inputMoney;
+	String result;
 	
-	public Scanner getInput() {
-		return input;
-	}
-	public void setInput(Scanner input) {
-		this.input = input;
+	public Exchange(int inputMoney) {
+		setInputMoney(inputMoney);
+		start();
 	}
 	
 	public int getInputMoney() {
@@ -23,25 +19,22 @@ class Exchange {
 	}
 	
 	// ▼UIs
-	void inputRequest() { // Request UI
-		System.out.print(
-			"input the sum(unit won) : "
-		);
-		input();
-	}
-	void returnResponse() { // Response UI
-		System.out.print(
-			(getInputMoney()/won) + "dollar."
-		);
+//	void inputRequest() { // Request UI
+//		System.out.print(
+//			"input the sum(unit won) : "
+//		);
+//		input();
+//	}
+	public String toString() { // Response UI
+		return result  + "dollar.";
 	}
 	// ▼Logics
 	void start() {
-		inputRequest();
-		input();
+		input(getInputMoney());
+		toString();
 	}
 	
-	void input() {
-		inputMoney = input.nextInt();
-		returnResponse();	
+	void input(int sum1) {
+		result = sum1 / won + " ";
 	}
 }

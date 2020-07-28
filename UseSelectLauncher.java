@@ -21,6 +21,10 @@ class SelectLauncher {
 	private String function3 = "calc area circle";
 	private String function4 = "calc exchange dollar";
 	
+	public SelectLauncher() {
+		start();
+	}
+	
 	public Scanner getInput() {
 		return input;
 	}
@@ -66,6 +70,8 @@ class SelectLauncher {
 	
 	void outputFunctionList() {
 		System.out.print(
+			"★  Constructor Do Input values, " + "\n" +
+			"don't Input Value.\n\n" +
 			"select the function." + "\n" +
 			"1. " + getFunction1() + "\n" +
 			"2. " + getFunction2() + "\n" +
@@ -86,20 +92,16 @@ class SelectLauncher {
 	public void selectFunction(int selectNum) {
 		switch(selectNum) {
 			case 1:
-				Add add = new Add();
-				add.start();
+				System.out.println(new Add(222, 555));
 			break;
 			case 2:
-				Bill bill = new Bill();
-				bill.start();
+				System.out.println(new Bill(1000,750));
 			break;
 			case 3:
-				CircleArea ca = new CircleArea();
-				ca.start();
+				System.out.println(new CircleArea(77.7));
 			break;
 			case 4:
-				Exchange ex = new Exchange();
-				ex.start();
+				System.out.println(new Exchange(777));
 			break;
 			
 			default:
@@ -111,7 +113,6 @@ class SelectLauncher {
 
 public class UseSelectLauncher {
 	public static void main(String[] args) {
-		SelectLauncher sl = new SelectLauncher();
-		sl.start();
+		new SelectLauncher();
 	}
 }

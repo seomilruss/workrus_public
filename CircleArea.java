@@ -1,19 +1,18 @@
 package part_basic.calc;
 
-import java.util.Scanner;
-
 class CircleArea {
 	// ▼Datas
-	Scanner input = new Scanner(System.in);
 	private double radius;
 	private double area;
 	
-	public Scanner getInput() {
-		return input;
+	public CircleArea(
+			double radius
+			) {
+		setRadius(radius);
+		start();
 	}
-	public void setInput(Scanner input) {
-		this.input = input;
-	}
+	
+	
 	public double getRadius() {
 		return radius;
 	}
@@ -27,27 +26,25 @@ class CircleArea {
 		this.area = area;
 	}
 	// ▼UIs
-	void inputRequest() { // Request UI
-		System.out.print(
-			"input radius : "
-		);
-		input();
-	}
-	void returnResponse() { // Response UI
-		System.out.print(
-			"area circle it's " + area + "(area)" + "\n"
-		);
+//	void inputRequest() { // Request UI
+//		System.out.print(
+//			"input radius : "
+//		);
+//	}
+	public String toString() { // Response UI
+		String result = "";
+		result += "radius it's " + getRadius() +"(cm)\n";
+		result += "area circle it's " + getArea() + "(area)" + "\n";
+		return result;
 	}
 	
 	// ▼Logics
 	void start() {
-		inputRequest();
-		input();
+		input(getRadius());
+		toString();
 	}
-	void input() {
-		radius = input.nextDouble();
-		process1(radius);
-		returnResponse();	
+	void input(double sumNum) {
+		process1(radius);	
 	}
 	double process1(double sum1) {
 		return area = 3.14 * radius * radius;
