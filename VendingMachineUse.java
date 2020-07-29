@@ -1,18 +1,119 @@
 package part_basic.object;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+class Drink { // 자판기 외부에서도 존재가능한 객체
+	private String name;
+	private double kcal; // 칼로리
+	private double ml; // 용량
+	private boolean caffeine; // 카페인의 유무
+	private boolean seal; // 밀봉유무
+	
+	public Drink(String name) {
+		setName(name);
+	}
+	public Drink(
+		String name,
+		double kcal,
+		double ml,
+		boolean caffeine,
+		boolean seal
+		) {
+		setName(name);
+		setKcal(kcal);
+		setMl(ml);
+		setCaffeine(caffeine);
+		setSeal(seal);
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getKcal() {
+		return kcal;
+	}
+	public void setKcal(double kcal) {
+		this.kcal = kcal;
+	}
+	public double getMl() {
+		return ml;
+	}
+	public void setMl(double ml) {
+		this.ml = ml;
+	}
+	public boolean isCaffeine() {
+		return caffeine;
+	}
+	public void setCaffeine(boolean caffeine) {
+		this.caffeine = caffeine;
+	}
+	public boolean isSeal() {
+		return seal;
+	}
+	public void setSeal(boolean seal) {
+		this.seal = seal;
+	}
+	
+	public void openSeal() {
+		seal = true;
+		System.out.println("캔을 열었습니다.");
+	}
+	
+	public void drinking() {
+		openSeal();
+		tase();
+		deThirst();
+		caffeinUp();
+		change();
+	}
+	private void tase() {
+		System.out.println("달고 쓴 맛");
+	}
+	private void deThirst() {
+		System.out.println("갈증해소");
+	}
+	private void caffeinUp() {
+		System.out.println("카페인 Up");
+	}
+	private void change() {
+		System.out.println("에너지 Up");
+	}
+	public String toString() {
+		String result = "";
+		return result = name;
+	}
+	
+//	public String toString() {
+//		String info = "음료수 정보" + "\n";
+//		info += "이름 : " + name + "\n";
+//		info += "칼로리 : " + kcal + "kcal\n";
+//		info += "용량 : " + ml + "ml\n";
+//		info += "카페인 유무 : " + caffeine + "\n";
+//		info += "밀봉여부 : " + seal + "\n";
+//	}
+}
 
 class VendingMachine { // 자판기
 	// ▼Datas
 	Scanner inputNum = new Scanner(System.in);
-	DisplayUserInterface dUI = new DisplayUserInterface();
-	ControlCircuit cct = new ControlCircuit();
+	DisplayStand dsd = new DisplayStand(); // 진열대
+	DisplayUserInterface dUI = new DisplayUserInterface(); // 디스플레이 UI
+	MainControler mct = new MainControler(); // 메인 컨트롤러
+	ArrayList<Drink> cans = new ArrayList<Drink>();
+	
 	public int userSelect; // 사용자 입력값
 	public int insertMoney; // 입력값
 	public int balance; // 잔액
 	public int gorgiaCoffe = 800;
 	public int maxwellCoffe = 500;
 	public int dAndCafeCoffe = 600;
+	
+	class DisplayStand {
+		public int itemNum; // 번호
+		public int itemPrice; // 상품번호
+	}
 	
 	class DisplayUserInterface {
 		// ▼UIs
@@ -77,16 +178,29 @@ class VendingMachine { // 자판기
 	
 	// ▼Logics
 	void start() {
-		cct.transactionModule();
+//		itemStorageBox();
+		mct.transactionModule();
+		
 	}
-	class ControlCircuit {
+	void itemStorageBox() { // 아이템 보관함
+		cans.add(0, new Drink("조지아"));
+		cans.add(1, new Drink("맥스웰"));
+		cans.add(2, new Drink("D&CAFE"));
+		for(Drink canNames : cans) {
+			System.out.println(canNames);
+		}
+	}
+	void userSelect() {
+		userSelect = inputNum.nextInt();
+	}
+	class MainControler {
 		public void transactionModule() { // 거래
 			selectItem();
 			inputMoney();
 		}
 		public void selectItem() { // 상품선택
 			dUI.itemList();
-			userSelect = inputNum.nextInt();
+			userSelect();
 			switch (userSelect) {
 			case 1:
 				insertMoney = gorgiaCoffe;
@@ -112,28 +226,31 @@ class VendingMachine { // 자판기
 				dUI.requestMoney();
 				dUI.checkMomey();
 				dUI.selectMoneyUnit();
-				userSelect = inputNum.nextInt();
-				switch (userSelect) {
-				case 1:
-					balance += 10;
-					break;
-				case 2:
-					balance += 50;
-					break;
-				case 3:
-					balance += 100;
-					break;
-				case 4:
-					balance += 500;
-					break;
-				case 5:
-					balance += 1000;
-					break;
-				default:
-					dUI.wrong();
-					break;
-				}
+				userSelect();
+				coinMec();
 				inputMoney();
+			}
+		}
+		public void coinMec() { // coinMechanism
+			switch (userSelect) {
+			case 1:
+				balance += 10;
+				break;
+			case 2:
+				balance += 50;
+				break;
+			case 3:
+				balance += 100;
+				break;
+			case 4:
+				balance += 500;
+				break;
+			case 5:
+				balance += 1000;
+				break;
+			default:
+				dUI.wrong();
+				break;
 			}
 		}
 		public void payMoney() { // 결제
