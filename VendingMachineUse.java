@@ -98,7 +98,6 @@ class Drink { // 자판기 외부에서도 존재가능한 객체
 class VendingMachine { // 자판기
 	// ▼Datas
 	Scanner inputNum = new Scanner(System.in);
-	DisplayStand dsd = new DisplayStand(); // 진열대
 	DisplayUserInterface dUI = new DisplayUserInterface(); // 디스플레이 UI
 	MainControler mct = new MainControler(); // 메인 컨트롤러
 	ArrayList<Drink> cans = new ArrayList<Drink>();
@@ -109,11 +108,6 @@ class VendingMachine { // 자판기
 	public int gorgiaCoffe = 800;
 	public int maxwellCoffe = 500;
 	public int dAndCafeCoffe = 600;
-	
-	class DisplayStand {
-		public int itemNum; // 번호
-		public int itemPrice; // 상품번호
-	}
 	
 	class DisplayUserInterface {
 		// ▼UIs
