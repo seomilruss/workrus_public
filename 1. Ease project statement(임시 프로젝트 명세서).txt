@@ -52,5 +52,23 @@ Drink.java
 VendingMachine.java [have a Drink and (Inner)DisplayUserInterface & (Inner)MainControler]
 DisplayUserInterface.java
 MainControler.java
-VendingMachineUse.java [have a main method - use VendingMachine]
+UseVendingMachine.java [have a main method - use VendingMachine]
 ---------------------------------------------------------------------------------------------------------------------------------------------
+Project (Game)StarCraft Unit Modeling (Java Programming_Level2) // 자판기 프로젝트(자바 프로그래밍 등급2)
+---------------------------------------------------------------------------------------------------------------------------------------------
+▼ account for project :
+게임속의 게임유닛 객체를 모델링해서 자바코드로 변환.
+
+=================================================================================
+IMove.java
+IStop.java
+IUseWeapon.java
+IPatrol.java
+IHold.java
+Unit.Java
+Zealot.java
+Medic.java
+Mutalisk.java
+UseStarCraft.java [have a main method - use VendingMachine]
+---------------------------------------------------------------------------------------------------------------------------------------------
+
