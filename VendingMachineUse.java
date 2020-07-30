@@ -3,14 +3,18 @@ package part_basic.object;
 import java.util.ArrayList;
 import java.util.Scanner;
 class Drink { // 자판기 외부에서도 존재가능한 객체
+	private int number;
 	private String name;
+	private int price;
 	private double kcal; // 칼로리
 	private double ml; // 용량
 	private boolean caffeine; // 카페인의 유무
 	private boolean seal; // 밀봉유무
 	
-	public Drink(String name) {
+	public Drink(int number, String name, int price) {
+		setNumber(number);
 		setName(name);
+		setPrice(price);
 	}
 	public Drink(
 		String name,
@@ -25,11 +29,23 @@ class Drink { // 자판기 외부에서도 존재가능한 객체
 		setCaffeine(caffeine);
 		setSeal(seal);
 	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	public double getKcal() {
 		return kcal;
@@ -55,7 +71,6 @@ class Drink { // 자판기 외부에서도 존재가능한 객체
 	public void setSeal(boolean seal) {
 		this.seal = seal;
 	}
-	
 	public void openSeal() {
 		seal = true;
 		System.out.println("캔을 열었습니다.");
@@ -81,8 +96,8 @@ class Drink { // 자판기 외부에서도 존재가능한 객체
 		System.out.println("에너지 Up");
 	}
 	public String toString() {
-		String result = "";
-		return result = name;
+		String str = number + ". " + name + " : ";
+		return str += price + "원";
 	}
 	
 //	public String toString() {
@@ -97,6 +112,10 @@ class Drink { // 자판기 외부에서도 존재가능한 객체
 
 class VendingMachine { // 자판기
 	// ▼Datas
+	private Drink gorgiaCoffe;
+	private Drink maxwellCoffe;
+	private Drink dAndCafeCoffe;
+	
 	Scanner inputNum = new Scanner(System.in);
 	DisplayUserInterface dUI = new DisplayUserInterface(); // 디스플레이 UI
 	MainControler mct = new MainControler(); // 메인 컨트롤러
@@ -105,17 +124,17 @@ class VendingMachine { // 자판기
 	public int userSelect; // 사용자 입력값
 	public int insertMoney; // 입력값
 	public int balance; // 잔액
-	public int gorgiaCoffe = 800;
-	public int maxwellCoffe = 500;
-	public int dAndCafeCoffe = 600;
+//	public int gorgiaCoffe = 800;
+//	public int maxwellCoffe = 500;
+//	public int dAndCafeCoffe = 600;
 	
 	class DisplayUserInterface {
 		// ▼UIs
 		void itemList() {
 			System.out.println("원하시는 상품의 번호를 선택해주세요" + "\n" +
-				"1. 조지아 커피 : " + gorgiaCoffe + "\n" +
-				"2. 맥스윌 커피 : " + maxwellCoffe + "\n" +
-				"3. D&cafe 커피 : " + dAndCafeCoffe
+				gorgiaCoffe + "\n" +
+				maxwellCoffe + "\n" +
+				dAndCafeCoffe
 			);
 		}
 		void requestMoney() {
@@ -172,17 +191,13 @@ class VendingMachine { // 자판기
 	
 	// ▼Logics
 	void start() {
-//		itemStorageBox();
-		mct.transactionModule();
-		
+		itemStorageBox();
 	}
 	void itemStorageBox() { // 아이템 보관함
-		cans.add(0, new Drink("조지아"));
-		cans.add(1, new Drink("맥스웰"));
-		cans.add(2, new Drink("D&CAFE"));
-		for(Drink canNames : cans) {
-			System.out.println(canNames);
-		}
+		gorgiaCoffe = new Drink(0, "조지아", 800);
+		maxwellCoffe = new Drink(1, "맥스웰", 500);
+		dAndCafeCoffe = new Drink(2, "D&CAFE", 600);
+		mct.transactionModule();
 	}
 	void userSelect() {
 		userSelect = inputNum.nextInt();
@@ -196,20 +211,21 @@ class VendingMachine { // 자판기
 			dUI.itemList();
 			userSelect();
 			switch (userSelect) {
-			case 1:
-				insertMoney = gorgiaCoffe;
+			case 0:
+				insertMoney = gorgiaCoffe.getPrice();
 				System.out.println("조지아 커피를 선택했습니다.");
 				break;
-			case 2:
-				insertMoney = maxwellCoffe;
+			case 1:
+				insertMoney = maxwellCoffe.getPrice();
 				System.out.println("맥스윌 커피를 선택했습니다.");
 				break;
-			case 3:
-				insertMoney = dAndCafeCoffe;
+			case 2:
+				insertMoney = dAndCafeCoffe.getPrice();
 				System.out.println("D&cafe 커피를 선택했습니다.");
 				break;
 			default:
 				dUI.wrong();
+				selectItem();
 				break;
 			}
 		}
