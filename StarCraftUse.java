@@ -1,6 +1,7 @@
 package part_basic.object;
 
 class Zealot {
+	String name = "질럿";
 	int sd = 60;
 	int hp = 100;
 	
@@ -21,6 +22,7 @@ class Zealot {
 	}
 }
 class Medic {
+	String name = "메딕";
 	int hp = 60;
 	int mp = 200;
 	
@@ -38,6 +40,7 @@ class Medic {
 	}
 }
 class Mutalisk {
+	String name = "뮤탈리스크";
 	int hp = 120;
 	
 	public void attack() {
@@ -57,6 +60,16 @@ class Mutalisk {
 	}
 }
 
-public class StarCraftUse {
-
+class StarCraftUse {
+	public static void main(String[] args) {
+		Zealot zealot = new Zealot();
+		Medic medic = new Medic();
+		Mutalisk mutalisk = new Mutalisk();
+		System.out.println(zealot.name);
+		zealot.attack();
+		System.out.println(medic.name);
+		medic.move();
+		System.out.println(mutalisk.name);
+		mutalisk.hold();
+	}
 }
