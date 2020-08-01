@@ -1,4 +1,4 @@
-임시 프로젝트 명세서(Ease project statement)
+읽어주세요(▼ ReadMe)
 author : Cho Young deok(조영덕)
 Github - https://github.com/seomilruss/workruss_public
 E-mail : wde906@naver.com
