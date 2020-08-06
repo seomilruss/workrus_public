@@ -6,6 +6,6 @@ E-mail : wde906@naver.com
 알림 현재 저장소는 변경되었습니다.
 
 새로운 저장소를 개설했습니다.
-https://github.com/seomilruss/workrus_javaSE_publicObjectDeop
+워크러스 자바SE 공공제 객체 창고 ▶ https://github.com/seomilruss/workrus_javaSE_publicObjectDeop
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
